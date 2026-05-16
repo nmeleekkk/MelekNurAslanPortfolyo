@@ -1,0 +1,40 @@
+﻿@model MelekNurAslanPortfolyo.Models.Project
+
+@{
+    ViewData["Title"] = "Yeni Proje Ekle";
+    Layout = "_AdminLayout";
+}
+
+<div class="container mt-5">
+    <h2>Yeni Proje Ekle</h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Create" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label class="form-label">Proje Başlığı</label>
+                    <input type="text" asp-for="Title" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Açıklama</label>
+                    <textarea asp-for="Description" class="form-control" rows="3" required></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Görsel URL</label>
+                    <input type="file" name="imageFile" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">GitHub URL</label>
+                    <input type="text" asp-for="GithubUrl" class="form-control" required />
+                </div>
+
+                <button type="submit" class="btn btn-success">Projeyi Kaydet</button>
+                <a asp-action="Index" class="btn btn-secondary">İptal ve Geri Dön</a>
+            </form>
+        </div>
+    </div>
+</div>
