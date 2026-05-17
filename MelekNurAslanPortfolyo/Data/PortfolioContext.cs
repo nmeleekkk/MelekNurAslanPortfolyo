@@ -13,5 +13,6 @@ namespace MelekNurAslanPortfolyo.Data
         public DbSet<Project> Projects { get; set; }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<ContactMessage> ContactMessages { get; set; }
+        public DbSet<About> Abouts { get; set; }
     }
 }

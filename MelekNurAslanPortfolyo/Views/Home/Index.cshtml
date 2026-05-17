@@ -1,76 +1,333 @@
-﻿@model List<MelekNurAslanPortfolyo.Models.Project>
-
+﻿@model IEnumerable<MelekNurAslanPortfolyo.Models.Project>
 @{
     ViewData["Title"] = "Ana Sayfa";
 }
 
-@if (TempData["SuccessMessage"] != null)
-{
-    <div class="container mt-3">
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <i class="fas fa-check-circle me-2"></i> @TempData["SuccessMessage"]
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<style>
+    @@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap');
+    @@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&family=Special+Elite&display=swap');
+
+    body {
+        background-color: #FCFBFA;
+        background-image: radial-gradient(#E8E3D9 1px, transparent 1px);
+        background-size: 25px 25px;
+        color: #5c4d4d;
+    }
+
+    .hero-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 85vh;
+        margin-top: 50px;
+        padding-left: 3%;
+    }
+
+    .intro-section {
+        flex: 1.2;
+        min-width: 400px;
+        padding-right: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .typewriter-title {
+        display: inline-block;
+        font-family: 'Courier Prime', monospace;
+        color: #8a5a6b;
+        font-size: 3.8rem;
+        font-weight: bold;
+        overflow: hidden;
+        white-space: nowrap;
+        border-right: 6px solid #c48b9f;
+        margin: 0;
+        animation: typing 1.5s steps(20, end) forwards, blink-caret 0.5s step-end 3 forwards;
+    }
+
+    .typewriter-subtitle {
+        display: inline-block;
+        font-family: 'Courier Prime', monospace;
+        color: #c48b9f;
+        font-size: 1.6rem;
+        font-weight: bold;
+        overflow: hidden;
+        white-space: nowrap;
+        border-right: 4px solid #c48b9f;
+        margin-top: 15px;
+        margin-bottom: 35px;
+        width: 0;
+        animation: typing 1.5s steps(20, end) forwards, blink-caret 0.5s step-end 3 forwards;
+    }
+
+    @@keyframes typing {
+        from { width: 0 }
+        to { width: 100% }
+    }
+    @@keyframes blink-caret {
+        0%, 99% { border-color: #c48b9f; }
+        100% { border-color: transparent; }
+    }
+
+    .retro-btn {
+        background: white;
+        border: 2px solid #c48b9f;
+        color: #c48b9f;
+        padding: 12px 30px;
+        text-decoration: none;
+        border-radius: 50px;
+        margin-right: 15px;
+        font-size: 15px;
+        font-weight: bold;
+        font-family: 'Courier Prime', monospace;
+        transition: all 0.3s ease;
+        display: inline-block;
+        box-shadow: 3px 3px 0px #d17894;
+    }
+    .retro-btn:hover {
+        background: #FFD1DC;
+        color: #c48b9f;
+        box-shadow: none;
+        transform: translateY(3px);
+    }
+
+    .scrapbook-section {
+        flex: 1.8;
+        min-width: 550px;
+        display: flex;
+        justify-content: center;
+        position: relative;
+    }
+
+    .canvas-notebook {
+        position: relative;
+        width: 100%;
+        max-width: 950px;
+        background-image: url('@ViewBag.About?.BackgroundImageUrl');
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        aspect-ratio: 4 / 3;
+        display: flex;
+        padding: 4% 6%;
+    }
+
+    .notebook-left-page {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-right: 5%;
+    }
+
+    .notebook-right-page {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 9%;
+        font-family: 'Caveat', cursive;
+        color: #4a4a4a;
+    }
+
+    .polaroid-wrapper {
+        position: relative;
+        transform: rotate(-4deg);
+        transition: transform 0.3s;
+        z-index: 5;
+    }
+    .polaroid-wrapper:hover {
+        transform: scale(1.05) rotate(0deg);
+        z-index: 10;
+    }
+
+    .polaroid {
+        background: white;
+        padding: 15px 15px 55px 15px;
+        box-shadow: 3px 5px 15px rgba(0,0,0,0.25);
+        width: 100%;
+        max-width: 350px;
+    }
+    .polaroid img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border: 1px solid #eee;
+    }
+
+    .washi-tape {
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        transform: translateX(-50%) rotate(5deg);
+        width: 120px;
+        height: 35px;
+        background-color: rgba(245, 240, 220, 0.85);
+        border-left: 3px dashed rgba(0,0,0,0.1);
+        border-right: 3px dashed rgba(0,0,0,0.1);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        z-index: 15;
+        backdrop-filter: blur(2px);
+    }
+
+    .notebook-right-page h2 {
+        font-family: 'Caveat', cursive;
+        color: #d17894;
+        font-size: 4.5rem;
+        font-weight: 700;
+        margin-top: 0;
+        margin-bottom: 15px;
+        transform: rotate(-2deg);
+    }
+    .notebook-right-page p {
+        font-family: 'Caveat', cursive;
+        font-size: 2.1rem;
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    .section-title {
+        font-family: 'Caveat', cursive;
+        color: #8a5a6b;
+        font-size: 4rem;
+        margin-bottom: 30px;
+    }
+</style>
+
+
+<div class="hero-container" id="about">
+    <div class="intro-section">
+        <h1 class="typewriter-title">@ViewBag.About?.Title</h1>
+        <p class="typewriter-subtitle">@ViewBag.About?.SubTitle</p>
+        <div style="margin-top: 10px;">
+            <a href="#" class="retro-btn">Resume</a>
+            <a href="#contact" class="retro-btn">Contact</a>
         </div>
     </div>
-}
 
-<div class="text-center mt-5 mb-5">
-    <h1 class="display-4">Portfolyoma Hoş Geldiniz</h1>
-    <p>Geliştirdiğim projeleri aşağıdan inceleyebilirsiniz.</p>
+    <div class="scrapbook-section">
+        <div class="canvas-notebook">
+            <div class="notebook-left-page">
+                @if (!string.IsNullOrEmpty(ViewBag.About?.ImageUrl))
+                {
+                    <div class="polaroid-wrapper">
+                        <div class="washi-tape"></div>
+                        <div class="polaroid">
+                            <img src="@ViewBag.About.ImageUrl" alt="Profil" />
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="notebook-right-page">
+                <h2>@ViewBag.About?.Greeting</h2>
+                <p>@ViewBag.About?.Description</p>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="container">
+<div id="projects" class="mt-5 pt-5">
+    <h2 class="section-title text-center">Projects</h2>
     <div class="row">
-        @foreach (var item in Model)
+        @if (Model != null)
         {
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm">
-                    <img src="@item.ImageUrl" class="card-img-top" style="height: 200px; object-fit: cover;" alt="@item.Title">
+            foreach (var item in Model)
+            {
+                <div class="col-md-4 mb-4">
 
-                    <div class="card-body">
-                        <h5 class="card-title">@item.Title</h5>
-                        <p class="card-text text-muted">@item.Description</p>
-                    </div>
+                    <div class="card h-100" data-bs-toggle="modal" data-bs-target="#projectModal-@item.Id" style="border-radius: 15px; overflow: hidden; border: none; background: transparent; cursor: pointer;">
 
-                    <div class="card-footer bg-white border-0 text-center mb-2">
-                        <a href="@item.GithubUrl" target="_blank" class="btn btn-outline-dark w-100">GitHub'da İncele</a>
+                        <div style="padding: 10px 10px 30px 10px; background: white; box-shadow: 2px 4px 12px rgba(0,0,0,0.15); border-radius: 10px; transform: rotate(@(new Random().Next(-2,2))deg); transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05) rotate(0deg)'; this.style.boxShadow='4px 8px 20px rgba(0,0,0,0.2)';" onmouseout="this.style.transform='scale(1) rotate(@(new Random().Next(-2,2))deg)'; this.style.boxShadow='2px 4px 12px rgba(0,0,0,0.15)';">
+
+                            <img src="@item.ImageUrl" class="card-img-top" alt="@item.Title" style="height: 200px; object-fit: contain; border-radius: 5px; padding: 10px;">
+
+                            <div class="card-body text-center" style="background-color: white; padding: 15px 10px 0 10px;">
+                                <h5 class="card-title" style="color: #c48b9f; font-family: 'Courier Prime', monospace; font-weight: bold; margin-bottom: 5px;">@item.Title</h5>
+
+                                @if (!string.IsNullOrEmpty(item.Technologies))
+                                {
+                                    <p style="font-size: 13px; color: #8a5a6b; font-family: 'Courier Prime', monospace; font-weight: bold; margin-bottom: 10px;">
+                                        [ @item.Technologies ]
+                                    </p>
+                                }
+
+                                @if (!string.IsNullOrEmpty(item.Description))
+                                {
+                                    <p style="font-size: 14px; font-family: 'Inter', sans-serif; color: #7a7a7a; margin-bottom: 15px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; text-align: left;">
+                                        @item.Description
+                                    </p>
+                                }
+
+                                <span class="retro-btn mt-2" style="font-size: 12px; padding: 6px 20px; border-radius: 10px; box-shadow: none;">Detayları Gör</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+
+                <div class="modal fade" id="projectModal-@item.Id" tabindex="-1" aria-labelledby="projectModalLabel-@item.Id" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content" style="background-color: #FCFBFA; border: 3px dashed #c48b9f; border-radius: 20px;">
+
+                            <div class="modal-header" style="border-bottom: 2px dashed #e8dcc6;">
+                                <h5 class="modal-title" id="projectModalLabel-@item.Id" style="color: #8a5a6b; font-family: 'Courier Prime', monospace; font-weight: bold; font-size: 1.8rem;">
+                                    @item.Title
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body text-center" style="padding: 30px;">
+                                <img src="@item.ImageUrl" alt="@item.Title" style="max-height: 350px; object-fit: contain; width: 100%; border-radius: 10px; margin-bottom: 25px;">
+
+                                @if (!string.IsNullOrEmpty(item.Technologies))
+                                {
+                                    <p style="font-size: 16px; color: #c48b9f; font-family: 'Courier Prime', monospace; font-weight: bold; margin-bottom: 20px;">
+                                        Kullanılan Teknolojiler: [ @item.Technologies ]
+                                    </p>
+                                }
+
+                                <p style="font-family: 'Inter', sans-serif; color: #5c4d4d; font-size: 16px; text-align: left; line-height: 1.7; margin-bottom: 0;">
+                                    @item.Description
+                                </p>
+                            </div>
+
+                            <div class="modal-footer" style="border-top: none; justify-content: center; padding-bottom: 30px;">
+                                <a href="@item.GithubUrl" target="_blank" class="retro-btn" style="text-decoration: none; font-size: 16px; padding: 10px 30px;">GitHub'da İncele</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            }
         }
     </div>
 </div>
 
-<hr class="mt-5 mb-5" />
-
-<div class="container mb-5">
+<div id="contact" class="mt-5 pt-5 mb-5">
+    <h2 class="section-title text-center">Contact Me</h2>
     <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow-sm p-4">
-                <h2 class="text-center mb-4">Bana Ulaşın</h2>
-
+        <div class="col-md-8">
+            <div class="card shadow-sm p-4" style="background-color: transparent; border: 3px dashed #c48b9f; border-radius: 20px;">
                 <form asp-action="SendMessage" asp-controller="Home" method="post">
                     <div class="mb-3">
-                        <label>Adınız</label>
-                        <input type="text" name="Name" class="form-control" required />
+                        <label style="color: #7a7a7a; font-family: 'Courier Prime', monospace;">Adınız</label>
+                        <input type="text" name="Name" class="form-control" required style="background: transparent; border: 2px solid #c48b9f; border-radius: 15px;" />
                     </div>
-
                     <div class="mb-3">
-                        <label>E-posta</label>
-                        <input type="email" name="Email" class="form-control" required />
+                        <label style="color: #7a7a7a; font-family: 'Courier Prime', monospace;">E-posta Adresiniz</label>
+                        <input type="email" name="Email" class="form-control" required style="background: transparent; border: 2px solid #c48b9f; border-radius: 15px;" />
                     </div>
-
                     <div class="mb-3">
-                        <label>Konu</label>
-                        <input type="text" name="Subject" class="form-control" required />
+                        <label style="color: #7a7a7a; font-family: 'Courier Prime', monospace;">Konu</label>
+                        <input type="text" name="Subject" class="form-control" required style="background: transparent; border: 2px solid #c48b9f; border-radius: 15px;" />
                     </div>
-
                     <div class="mb-3">
-                        <label>Mesaj</label>
-                        <textarea name="Message" class="form-control" rows="4" required></textarea>
+                        <label style="color: #7a7a7a; font-family: 'Courier Prime', monospace;">Mesajınız</label>
+                        <textarea name="Message" class="form-control" rows="4" required style="background: transparent; border: 2px solid #c48b9f; border-radius: 15px;"></textarea>
                     </div>
-
-                    <button type="submit" class="btn btn-primary w-100">Mesajı Gönder</button>
+                    <button type="submit" class="retro-btn w-100" style="background-color: #c48b9f; color: white; text-align: center; font-size: 16px; border-radius: 15px; box-shadow: none;">
+                        Mesajı Gönder
+                    </button>
                 </form>
             </div>
         </div>

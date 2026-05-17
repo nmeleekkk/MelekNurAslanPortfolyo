@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "_AdminLayout";
+}
+
+<div class="row">
+    <div class="col-lg-3 col-6">
+        <div class="small-box bg-info shadow">
+            <div class="inner">
+                <h3>@ViewBag.ProjectCount</h3>
+                <p>Projeler</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-folder-open"></i>
+            </div>
+            <a asp-controller="Project" asp-action="Index" class="small-box-footer">Detaylar <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-6">
+        <div class="small-box bg-success shadow">
+            <div class="inner">
+                <h3>@ViewBag.MessageCount</h3>
+                <p>Mesajlar</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-envelope"></i>
+            </div>
+            <a asp-controller="Message" asp-action="Index" class="small-box-footer">Detaylar <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+</div>

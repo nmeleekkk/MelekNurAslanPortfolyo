@@ -18,8 +18,10 @@ namespace MelekNurAslanPortfolyo.Controllers
 
         public IActionResult Index()
         {
-            // Veritabanýndan projeleri çekip ön yüze yolluyoruz
             var projects = _context.Projects.ToList();
+
+            ViewBag.About = _context.Abouts.FirstOrDefault();
+
             return View(projects);
         }
 

@@ -1,0 +1,64 @@
+﻿@model MelekNurAslanPortfolyo.Models.About
+@{
+    ViewData["Title"] = "Hakkımda Yönetimi";
+    Layout = "_AdminLayout";
+}
+
+<div class="card card-primary shadow">
+    <div class="card-header">
+        <h3 class="card-title">Hakkımda Bilgilerini Düzenle</h3>
+    </div>
+    <form asp-action="Update" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="ImageUrl" />
+
+        <div class="card-body">
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+            }
+
+            <div class="form-group">
+                <label>Büyük Başlık</label>
+                <input type="text" asp-for="Title" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label>Alt Başlık</label>
+                <input type="text" asp-for="SubTitle" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label>Küçük Başlık</label>
+                <input type="text" asp-for="Greeting" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label>Hakkında</label>
+                <textarea asp-for="Description" class="form-control" rows="5" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Polaroid Fotoğrafın</label>
+                <input type="file" name="imageFile" class="form-control" />
+                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                {
+                    <img src="@Model.ImageUrl" class="mt-2" style="width:100px; border: 2px solid #ddd;" />
+                }
+            </div>
+
+            <div class="form-group">
+                <label>Defter Arka Planı</label>
+                <input type="file" name="backgroundImageFile" class="form-control" />
+                @if (!string.IsNullOrEmpty(Model.BackgroundImageUrl))
+                {
+                    <img src="@Model.BackgroundImageUrl" class="mt-2" style="width:150px; border: 2px solid #ddd;" />
+                }
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Değişiklikleri Kaydet</button>
+        </div>
+    </form>
+</div>

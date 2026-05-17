@@ -32,6 +32,11 @@
                     <input type="text" asp-for="GithubUrl" class="form-control" required />
                 </div>
 
+                <div class="mb-3">
+                    <label class="form-label">Kullanılan Teknolojiler</label>
+                    <input type="text" asp-for="Technologies" class="form-control" />
+                </div>
+
                 <button type="submit" class="btn btn-success">Projeyi Kaydet</button>
                 <a asp-action="Index" class="btn btn-secondary">İptal ve Geri Dön</a>
             </form>
