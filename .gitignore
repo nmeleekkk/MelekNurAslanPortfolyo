@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Dinamik yüklenen resimleri yoksay
+**/wwwroot/img/*
