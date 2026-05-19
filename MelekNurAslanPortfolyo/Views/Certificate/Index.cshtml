@@ -1,0 +1,41 @@
+﻿@model List<MelekNurAslanPortfolyo.Models.Certificate>
+@{
+    ViewData["Title"] = "Sertifikalar";
+    Layout = "_AdminLayout";
+}
+
+<div class="card mt-3">
+    <div class="card-header">
+        <h3 class="card-title">Sertifikalarım</h3>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Sertifika Adı</th>
+                    <th>Açıklama</th>
+                    <th>Görsel</th>
+                    <th>Sil</th>
+                    <th>Güncelle</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Title</td>
+                        <td>@item.Description</td>
+                        <td>
+                            <img src="@item.ImageUrl" style="width: 80px; height: 60px; object-fit: contain;" alt="@item.Title" />
+                        </td>
+                        <td><a href="/Certificate/Delete/@item.Id" class="btn btn-danger btn-sm">Sil</a></td>
+                        <td><a href="/Certificate/Edit/@item.Id" class="btn btn-warning btn-sm">Güncelle</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a href="/Certificate/Create" class="btn btn-primary mt-2">Yeni Sertifika Ekle</a>
+    </div>
+</div>

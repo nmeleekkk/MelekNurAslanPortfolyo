@@ -1,0 +1,45 @@
+﻿@model List<MelekNurAslanPortfolyo.Models.Skill>
+@{
+    ViewData["Title"] = "Yetenekler & Teknolojiler";
+    Layout = "_AdminLayout";
+}
+
+<div class="card mt-3">
+    <div class="card-header">
+        <h3 class="card-title">Kullandığım Teknolojiler</h3>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Teknoloji Adı</th>
+                    <th>Hakimiyet (%)</th>
+                    <th>Logo</th>
+                    <th>Sil</th>
+                    <th>Güncelle</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>
+                            <div class="progress">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: @item.ProficiencyValue%;" aria-valuenow="@item.ProficiencyValue" aria-valuemin="0" aria-valuemax="100">@item.ProficiencyValue%</div>
+                            </div>
+                        </td>
+                        <td>
+                            <img src="@item.ImageUrl" style="width:35px; height:35px; object-fit:contain;" alt="@item.Name" />
+                        </td>
+                        <td><a href="/Skill/Delete/@item.Id" class="btn btn-danger btn-sm">Sil</a></td>
+                        <td><a href="/Skill/Edit/@item.Id" class="btn btn-warning btn-sm">Güncelle</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a href="/Skill/Create" class="btn btn-primary mt-2">Yeni Teknoloji Ekle</a>
+    </div>
+</div>

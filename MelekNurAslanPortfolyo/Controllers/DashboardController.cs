@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MelekNurAslanPortfolyo.Data;
 using Microsoft.AspNetCore.Authorization;
+using System.Linq;
 
 namespace MelekNurAslanPortfolyo.Controllers
 {
@@ -18,8 +19,10 @@ namespace MelekNurAslanPortfolyo.Controllers
         {
             ViewBag.ProjectCount = _context.Projects.Count();
             ViewBag.MessageCount = _context.ContactMessages.Count();
-
-            ViewBag.SkillCount = 0;
+            ViewBag.SkillCount = _context.Skills.Count();
+            ViewBag.CertificateCount = _context.Certificates.Count();
+            ViewBag.EducationCount = _context.Educations.Count();
+            ViewBag.SocialMediaCount = _context.SocialMedias.Count();
 
             return View();
         }

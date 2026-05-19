@@ -201,7 +201,7 @@
         <h1 class="typewriter-title">@ViewBag.About?.Title</h1>
         <p class="typewriter-subtitle">@ViewBag.About?.SubTitle</p>
         <div style="margin-top: 10px;">
-            <a href="#" class="retro-btn">Resume</a>
+            <a href="#contact" class="retro-btn">Resume</a>
             <a href="#contact" class="retro-btn">Contact</a>
         </div>
     </div>
@@ -227,39 +227,46 @@
     </div>
 </div>
 
+@await Component.InvokeAsync("EducationList")
+@await Component.InvokeAsync("SkillList")
+@await Component.InvokeAsync("CertificateList")
+
 <div id="projects" class="mt-5 pt-5">
-    <h2 class="section-title text-center">Projects</h2>
-    <div class="row">
+    <h2 class="section-title text-center">Projeler</h2>
+    <div class="row d-flex align-items-stretch">
         @if (Model != null)
         {
             foreach (var item in Model)
             {
-                <div class="col-md-4 mb-4">
+                <div class="col-md-4 mb-4 d-flex">
+                    <div class="card w-100" data-bs-toggle="modal" data-bs-target="#projectModal-@item.Id" style="border-radius: 15px; overflow: hidden; border: none; background: transparent; cursor: pointer; display: flex;">
 
-                    <div class="card h-100" data-bs-toggle="modal" data-bs-target="#projectModal-@item.Id" style="border-radius: 15px; overflow: hidden; border: none; background: transparent; cursor: pointer;">
+                        <div style="padding: 10px 10px 20px 10px; background: white; box-shadow: 2px 4px 12px rgba(0,0,0,0.15); border-radius: 10px; transform: rotate(@(new Random().Next(-2,2))deg); transition: all 0.3s ease; display: flex; flex-direction: column; width: 100%;" onmouseover="this.style.transform='scale(1.05) rotate(0deg)'; this.style.boxShadow='4px 8px 20px rgba(0,0,0,0.2)';" onmouseout="this.style.transform='scale(1) rotate(@(new Random().Next(-2,2))deg)'; this.style.boxShadow='2px 4px 12px rgba(0,0,0,0.15)';" class="polaroid-project">
 
-                        <div style="padding: 10px 10px 30px 10px; background: white; box-shadow: 2px 4px 12px rgba(0,0,0,0.15); border-radius: 10px; transform: rotate(@(new Random().Next(-2,2))deg); transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05) rotate(0deg)'; this.style.boxShadow='4px 8px 20px rgba(0,0,0,0.2)';" onmouseout="this.style.transform='scale(1) rotate(@(new Random().Next(-2,2))deg)'; this.style.boxShadow='2px 4px 12px rgba(0,0,0,0.15)';">
+                            <div style="height: 180px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                                <img src="@item.ImageUrl" class="card-img-top" alt="@item.Title" style="max-height: 100%; max-width: 100%; object-fit: contain; border-radius: 5px; padding: 10px;">
+                            </div>
 
-                            <img src="@item.ImageUrl" class="card-img-top" alt="@item.Title" style="height: 200px; object-fit: contain; border-radius: 5px; padding: 10px;">
-
-                            <div class="card-body text-center" style="background-color: white; padding: 15px 10px 0 10px;">
-                                <h5 class="card-title" style="color: #c48b9f; font-family: 'Courier Prime', monospace; font-weight: bold; margin-bottom: 5px;">@item.Title</h5>
+                            <div class="card-body text-center" style="background-color: white; padding: 15px 10px 0 10px; flex-grow: 1; display: flex; flex-direction: column;">
+                                <h5 class="card-title" style="color: #c48b9f; font-family: 'Courier Prime', monospace; font-weight: bold; margin-bottom: 10px; min-height: 2.5em; display: flex; align-items: center; justify-content: center;">@item.Title</h5>
 
                                 @if (!string.IsNullOrEmpty(item.Technologies))
                                 {
-                                    <p style="font-size: 13px; color: #8a5a6b; font-family: 'Courier Prime', monospace; font-weight: bold; margin-bottom: 10px;">
+                                    <p style="font-size: 13px; color: #8a5a6b; font-family: 'Courier Prime', monospace; font-weight: bold; margin-bottom: 10px; min-height: 2.6em;">
                                         [ @item.Technologies ]
                                     </p>
                                 }
 
                                 @if (!string.IsNullOrEmpty(item.Description))
                                 {
-                                    <p style="font-size: 14px; font-family: 'Inter', sans-serif; color: #7a7a7a; margin-bottom: 15px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; text-align: left;">
+                                    <p style="font-size: 14px; font-family: 'Inter', sans-serif; color: #7a7a7a; margin-bottom: 20px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; text-align: left; flex-grow: 1;">
                                         @item.Description
                                     </p>
                                 }
 
-                                <span class="retro-btn mt-2" style="font-size: 12px; padding: 6px 20px; border-radius: 10px; box-shadow: none;">Detayları Gör</span>
+                                <div class="mt-auto">
+                                    <span class="retro-btn" style="font-size: 12px; padding: 6px 20px; border-radius: 10px; box-shadow: none; display: inline-block;">Detayları Gör</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -268,33 +275,27 @@
                 <div class="modal fade" id="projectModal-@item.Id" tabindex="-1" aria-labelledby="projectModalLabel-@item.Id" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content" style="background-color: #FCFBFA; border: 3px dashed #c48b9f; border-radius: 20px;">
-
                             <div class="modal-header" style="border-bottom: 2px dashed #e8dcc6;">
                                 <h5 class="modal-title" id="projectModalLabel-@item.Id" style="color: #8a5a6b; font-family: 'Courier Prime', monospace; font-weight: bold; font-size: 1.8rem;">
                                     @item.Title
                                 </h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-
                             <div class="modal-body text-center" style="padding: 30px;">
                                 <img src="@item.ImageUrl" alt="@item.Title" style="max-height: 350px; object-fit: contain; width: 100%; border-radius: 10px; margin-bottom: 25px;">
-
                                 @if (!string.IsNullOrEmpty(item.Technologies))
                                 {
                                     <p style="font-size: 16px; color: #c48b9f; font-family: 'Courier Prime', monospace; font-weight: bold; margin-bottom: 20px;">
                                         Kullanılan Teknolojiler: [ @item.Technologies ]
                                     </p>
                                 }
-
                                 <p style="font-family: 'Inter', sans-serif; color: #5c4d4d; font-size: 16px; text-align: left; line-height: 1.7; margin-bottom: 0;">
                                     @item.Description
                                 </p>
                             </div>
-
                             <div class="modal-footer" style="border-top: none; justify-content: center; padding-bottom: 30px;">
-                                <a href="@item.GithubUrl" target="_blank" class="retro-btn" style="text-decoration: none; font-size: 16px; padding: 10px 30px;">GitHub'da İncele</a>
+                                <a href="@item.GithubUrl" target="_blank" class="retro-btn" style="text-decoration: none; font-size: 16px; padding: 10px 30px; box-shadow: none;">GitHub'da İncele</a>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -304,7 +305,7 @@
 </div>
 
 <div id="contact" class="mt-5 pt-5 mb-5">
-    <h2 class="section-title text-center">Contact Me</h2>
+    <h2 class="section-title text-center">Benimle İletişime Geçin</h2>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-sm p-4" style="background-color: transparent; border: 3px dashed #c48b9f; border-radius: 20px;">

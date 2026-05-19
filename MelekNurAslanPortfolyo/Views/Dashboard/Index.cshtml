@@ -29,4 +29,56 @@
             <a asp-controller="Message" asp-action="Index" class="small-box-footer">Detaylar <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
+
+    <div class="col-lg-3 col-6">
+        <div class="small-box bg-warning shadow">
+            <div class="inner">
+                <h3>@ViewBag.SkillCount</h3>
+                <p>Yetenekler</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-code"></i>
+            </div>
+            <a asp-controller="Skill" asp-action="Index" class="small-box-footer">Detaylar <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-6">
+        <div class="small-box bg-danger shadow">
+            <div class="inner">
+                <h3>@ViewBag.CertificateCount</h3>
+                <p>Sertifikalar</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-certificate"></i>
+            </div>
+            <a asp-controller="Certificate" asp-action="Index" class="small-box-footer">Detaylar <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-6">
+        <div class="small-box bg-primary shadow">
+            <div class="inner">
+                <h3>@ViewBag.EducationCount</h3>
+                <p>Eğitim</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <a asp-controller="Education" asp-action="Index" class="small-box-footer">Detaylar <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-6">
+        <div class="small-box bg-secondary shadow">
+            <div class="inner">
+                <h3>@ViewBag.SocialMediaCount</h3>
+                <p>Sosyal Medya</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-share-alt"></i>
+            </div>
+            <a asp-controller="SocialMedia" asp-action="Index" class="small-box-footer">Detaylar <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
 </div>

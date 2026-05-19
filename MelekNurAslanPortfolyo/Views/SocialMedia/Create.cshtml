@@ -1,0 +1,30 @@
+﻿@model MelekNurAslanPortfolyo.Models.SocialMedia
+@{
+    ViewData["Title"] = "Yeni Sosyal Medya Ekle";
+    Layout = "_AdminLayout";
+}
+
+<div class="card mt-3">
+    <div class="card-header">
+        <h3 class="card-title">Yeni Sosyal Medya Hesabı</h3>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <div class="form-group mb-3">
+                <label>Platform Adı</label>
+                <input type="text" asp-for="PlatformName" class="form-control" placeholder="" required />
+            </div>
+            <div class="form-group mb-3">
+                <label>Profil Linki (URL)</label>
+                <input type="text" asp-for="Url" class="form-control" placeholder="" required />
+            </div>
+            <div class="form-group mb-3">
+                <label>İkon Kodu</label>
+                <input type="text" asp-for="Icon" class="form-control" placeholder="" />
+                <small class="text-muted"></small>
+            </div>
+            <button class="btn btn-success">Kaydet</button>
+            <a href="/SocialMedia/Index" class="btn btn-secondary">İptal</a>
+        </form>
+    </div>
+</div>

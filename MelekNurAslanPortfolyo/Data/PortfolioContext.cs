@@ -14,5 +14,9 @@ namespace MelekNurAslanPortfolyo.Data
         public DbSet<Admin> Admins { get; set; }
         public DbSet<ContactMessage> ContactMessages { get; set; }
         public DbSet<About> Abouts { get; set; }
+        public DbSet<SocialMedia> SocialMedias { get; set; }
+        public DbSet<Skill> Skills { get; set; }
+        public DbSet<Certificate> Certificates { get; set; }
+        public DbSet<Education> Educations { get; set; }
     }
 }

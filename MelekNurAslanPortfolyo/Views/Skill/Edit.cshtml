@@ -1,0 +1,32 @@
+﻿@model MelekNurAslanPortfolyo.Models.Skill
+@{
+    ViewData["Title"] = "Teknoloji Güncelle";
+    Layout = "_AdminLayout";
+}
+
+<div class="card mt-3">
+    <div class="card-header">
+        <h3 class="card-title">Teknoloji/Yetenek Güncelle</h3>
+    </div>
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="ImageUrl" />
+
+            <div class="form-group mb-3">
+                <label>Teknoloji Adı</label>
+                <input type="text" asp-for="Name" class="form-control" required />
+            </div>
+            <div class="form-group mb-3">
+                <label>Hakimiyet Oranı (0 - 100)</label>
+                <input type="number" asp-for="ProficiencyValue" class="form-control" min="0" max="100" required />
+            </div>
+            <div class="form-group mb-3">
+                <label>Teknoloji Logosu</label>
+                <input type="file" name="imageFile" class="form-control" />
+            </div>
+            <button class="btn btn-warning">Güncelle</button>
+            <a href="/Skill/Index" class="btn btn-secondary">İptal</a>
+        </form>
+    </div>
+</div>

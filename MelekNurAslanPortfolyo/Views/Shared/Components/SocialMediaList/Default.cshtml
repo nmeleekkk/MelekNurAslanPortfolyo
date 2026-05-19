@@ -1,0 +1,10 @@
+﻿@model List<MelekNurAslanPortfolyo.Models.SocialMedia>
+
+<div class="social-links mt-3 text-center">
+    @foreach (var item in Model)
+    {
+        <a href="@item.Url" target="_blank" class="mx-2 fs-4 text-dark" title="@item.PlatformName">
+            <i class="@item.Icon"></i>
+        </a>
+    }
+</div>

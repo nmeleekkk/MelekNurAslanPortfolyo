@@ -1,0 +1,49 @@
+﻿@model List<MelekNurAslanPortfolyo.Models.Certificate>
+
+<div id="certificates" class="mt-5 pt-5">
+    <h2 class="section-title text-center" style="font-family: 'Caveat', cursive; color: #8a5a6b; font-size: 4rem; margin-bottom: 30px;">Sertifikalar</h2>
+    <div class="row d-flex align-items-stretch">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4 d-flex">
+                <div class="card w-100" data-bs-toggle="modal" data-bs-target="#certModal-@item.Id" style="border-radius: 15px; overflow: hidden; border: none; background: transparent; cursor: pointer; display: flex;">
+
+                    <div style="padding: 10px 10px 20px 10px; background: white; box-shadow: 2px 4px 12px rgba(0,0,0,0.15); border-radius: 10px; transform: rotate(@(new Random().Next(-2,2))deg); transition: all 0.3s ease; display: flex; flex-direction: column; width: 100%;" onmouseover="this.style.transform='scale(1.05) rotate(0deg)'; this.style.boxShadow='4px 8px 20px rgba(0,0,0,0.2)';" onmouseout="this.style.transform='scale(1) rotate(@(new Random().Next(-2,2))deg)'; this.style.boxShadow='2px 4px 12px rgba(0,0,0,0.15)';" class="polaroid-card">
+
+                        <div style="height: 200px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                            <img src="@item.ImageUrl" class="card-img-top" alt="@item.Title" style="max-height: 100%; max-width: 100%; object-fit: contain; border-radius: 5px; padding: 10px;">
+                        </div>
+
+                        <div class="card-body text-center" style="background-color: white; padding: 15px 10px 0 10px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                            <h5 class="card-title" style="color: #c48b9f; font-family: 'Courier Prime', monospace; font-weight: bold; margin-bottom: 15px; min-height: 3em; display: flex; align-items: center; justify-content: center;">
+                                @item.Title
+                            </h5>
+                            <div class="mt-auto">
+                                <span class="retro-btn" style="font-size: 12px; padding: 6px 20px; border-radius: 10px; box-shadow: none; display: inline-block;">Detayları Gör</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="certModal-@item.Id" tabindex="-1" aria-labelledby="certModalLabel-@item.Id" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content" style="background-color: #FCFBFA; border: 3px dashed #c48b9f; border-radius: 20px;">
+                        <div class="modal-header" style="border-bottom: 2px dashed #e8dcc6;">
+                            <h5 class="modal-title" id="certModalLabel-@item.Id" style="color: #8a5a6b; font-family: 'Courier Prime', monospace; font-weight: bold; font-size: 1.8rem;">
+                                @item.Title
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center" style="padding: 30px;">
+                            <img src="@item.ImageUrl" alt="@item.Title" style="max-height: 400px; object-fit: contain; width: 100%; border-radius: 10px; margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                            <p style="font-family: 'Inter', sans-serif; color: #5c4d4d; font-size: 16px; text-align: left; line-height: 1.7; margin-bottom: 0;">
+                                @item.Description
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

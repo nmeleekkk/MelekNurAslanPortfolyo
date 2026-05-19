@@ -1,0 +1,42 @@
+﻿@model MelekNurAslanPortfolyo.Models.SocialMedia
+@{
+    ViewData["Title"] = "Sosyal Medya Güncelle";
+    Layout = "_AdminLayout";
+}
+
+<div class="card mt-3">
+    <div class="card-header">
+        <h3 class="card-title">Sosyal Medya Hesabı Güncelle</h3>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group mb-3">
+                <label>Platform Adı</label>
+                <input type="text" asp-for="PlatformName" class="form-control" required />
+            </div>
+
+            <div class="form-group mb-3">
+                <label>Profil Linki (URL)</label>
+                <input type="text" asp-for="Url" class="form-control" required />
+            </div>
+
+            <div class="form-group mb-3">
+                <label>İkon Kodu</label>
+                <input type="text" asp-for="Icon" class="form-control" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label>Durum</label>
+                <select asp-for="Status" class="form-control">
+                    <option value="true">Aktif</option>
+                    <option value="false">Pasif</option>
+                </select>
+            </div>
+
+            <button class="btn btn-warning">Güncelle</button>
+            <a href="/SocialMedia/Index" class="btn btn-secondary">İptal</a>
+        </form>
+    </div>
+</div>

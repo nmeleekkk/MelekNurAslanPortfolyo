@@ -1,0 +1,50 @@
+﻿@model List<MelekNurAslanPortfolyo.Models.SocialMedia>
+@{
+    ViewData["Title"] = "Sosyal Medya";
+    Layout = "_AdminLayout";
+}
+
+<div class="card mt-3">
+    <div class="card-header">
+        <h3 class="card-title">Sosyal Medya Hesaplarım</h3>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Platform</th>
+                    <th>Bağlantı</th>
+                    <th>İkon Kod</th>
+                    <th>Durum</th>
+                    <th>Sil</th>
+                    <th>Güncelle</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.PlatformName</td>
+                        <td><a href="@item.Url" target="_blank">Linke Git</a></td>
+                        <td>@item.Icon</td>
+                        <td>
+                            @if (item.Status)
+                            {
+                                <span class="badge bg-success">Aktif</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">Pasif</span>
+                            }
+                        </td>
+                        <td><a href="/SocialMedia/Delete/@item.Id" class="btn btn-danger btn-sm">Sil</a></td>
+                        <td><a href="/SocialMedia/Edit/@item.Id" class="btn btn-warning btn-sm">Güncelle</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a href="/SocialMedia/Create" class="btn btn-primary mt-2">Yeni Hesap Ekle</a>
+    </div>
+</div>

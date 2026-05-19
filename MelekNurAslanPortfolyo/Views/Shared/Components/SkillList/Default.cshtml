@@ -1,0 +1,89 @@
+﻿@model List<MelekNurAslanPortfolyo.Models.Skill>
+
+<section id="skills" class="mt-5 pt-5 mb-5">
+    <h2 class="text-center mb-5" style="font-family: 'Caveat', cursive; color: #8a5a6b; font-size: 4rem;">Kullanılan Teknolojiler</h2>
+
+    <div class="skills-slider-container">
+        <div class="skills-slider" id="draggable-slider">
+            @foreach (var item in Model)
+            {
+                <div class="skill-card">
+                    <div class="card h-100 border-0 shadow-sm text-center py-4" style="background-color: white; border-radius: 20px; transition: all 0.3s; border: 2px dashed #e8dcc6;">
+                        <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                            <img src="@item.ImageUrl" alt="@item.Name" style="width: 75px; height: 75px; object-fit: contain; margin-bottom: 15px; pointer-events: none;" />
+
+                            <h5 class="card-title mb-0" style="color: #5c4d4d; font-family: 'Courier Prime', monospace; font-weight: bold; font-size: 18px;">@item.Name</h5>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .skills-slider-container {
+        width: 100%;
+        padding: 10px 0;
+        overflow: hidden;
+    }
+
+    .skills-slider {
+        display: flex;
+        gap: 25px;
+        overflow-x: auto;
+        padding-bottom: 25px;
+        cursor: grab;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+        .skills-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .skills-slider:active {
+            cursor: grabbing;
+        }
+
+    .skill-card {
+        flex: 0 0 auto;
+        width: 180px;
+        user-select: none;
+    }
+
+        .skill-card .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 25px rgba(196, 139, 159, 0.2) !important;
+            border-color: #c48b9f !important;
+        }
+</style>
+
+<script>
+    const slider = document.getElementById('draggable-slider');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+    });
+
+    slider.addEventListener('mouseleave', () => {
+        isDown = false;
+    });
+
+    slider.addEventListener('mouseup', () => {
+        isDown = false;
+    });
+
+    slider.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2;
+        slider.scrollLeft = scrollLeft - walk;
+    });
+</script>
